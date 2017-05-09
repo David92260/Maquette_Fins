@@ -132,13 +132,17 @@ void Test_pilotage_fins(){
 
   int temp;
   while(1){
-    Serial.print("\nWelcome to the motor test.\nPlease be sure that the robot CANNOT MOVE\nThe weels must be off the floor when you start the test.\n\n1. Start the motor test.\n");
+    Serial.print("\n----------------------------------\n");
+    Serial.print("\nTest du pilotage des fins...      \n");
+    Serial.print("\n----------------------------------\n");
+    Serial.print("\nAssurez-vous que les fins sont bien deployes, et que rien n'entrave le mouvement des volets\n");
+    Serial.print("\nEntrez 1 pour lancer la procedure.\n");
     while(1){
       temp = retrieve_data();
       if(temp == 49){  
         break;
       }
-      else Serial.print("Please enter 1 to start the test.\n");
+      else Serial.print("Entrez 1 pour lancer la procedure.\n");
     };
     /* Test de pilotage des ailerons*/
 
@@ -147,14 +151,32 @@ void Test_pilotage_fins(){
     myServo1.write(120); // position à +30° par rapport à la position centrale à 90°
     delay(1000); // attente à nouveau
     myServo1.write(90); // remettre le servo à 90°, position centrale
+
+    myServo2.write(60); // mettre le servo à 60° => déplacement de -30° à partir de la position centrale à 90°
+    delay(1000); // ce délai est nécessaire pour que le servo atteigne sa position
+    myServo2.write(120); // position à +30° par rapport à la position centrale à 90°
+    delay(1000); // attente à nouveau
+    myServo2.write(90); // remettre le servo à 90°, position centrale
+
+    myServo3.write(60); // mettre le servo à 60° => déplacement de -30° à partir de la position centrale à 90°
+    delay(1000); // ce délai est nécessaire pour que le servo atteigne sa position
+    myServo3.write(120); // position à +30° par rapport à la position centrale à 90°
+    delay(1000); // attente à nouveau
+    myServo3.write(90); // remettre le servo à 90°, position centrale
+
+    myServo4.write(60); // mettre le servo à 60° => déplacement de -30° à partir de la position centrale à 90°
+    delay(1000); // ce délai est nécessaire pour que le servo atteigne sa position
+    myServo4.write(120); // position à +30° par rapport à la position centrale à 90°
+    delay(1000); // attente à nouveau
+    myServo4.write(90); // remettre le servo à 90°, position centrale
     
-    Serial.print("\nDid both motors work?\n1. Yes It's fine.\n2. No, run the test again. \n");
+    Serial.print("\nLes quatre ailerons ont-ils bouge?\n1. Oui.\n2. Non, recommencer le test.\n");
     while(1){
       temp = retrieve_data();              //wait for answer
       if (temp == 50 | temp == 49){       //is it a 1 or 2?
         break;
       }
-      else Serial.print("Please enter 1 or 2\n");
+      else Serial.print("Entrez 1 ou 2.\n");
     }
     if (temp == 49){                        //if '1' is received, end this case.
       break;
